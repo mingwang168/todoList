@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon"  type="image/icon" href="./favicon.ico">
+    <link rel="stylesheet" href="./css/style.css" />
+    <title>Todo List</title>
+  </head>
+  <body>
+    <header>
+      <h1>To Dos<span>Draggable & Double click to edit</span></h1>
+
+    </header>
+    <main>
+      <div class="box todo-box">
+        <div class="box-title">To DO</div>
+        <ol
+          class="tasks-box"
+          id="todo"
+          ondrop="drop(event)"
+          ondragover="allowDrop(event)"
+        ></ol>
+          <textarea id="newTask" style="display: none" name="newTask" required></textarea>
+          <button class="box-button" id="add-button" onclick="addTodo(this)">
+            Add New Task
+          </button>
+          <div id="submit-cancel">
+            <input type="submit"
+              id="submit-button"
+              onclick="submitTodo()"
+              style="display: none"
+              value="Submit"
+            />
+            <button
+              id="cancel-button"
+              onclick="cancel(event)"
+              style="display: none"
+            >
+              Cancel
+            </button>
+          </div>
+      </div>
+      <div class="box progress-box">
+        <div class="box-title">In Progress</div>
+        <ol
+          class="tasks-box"
+          id="progress"
+          ondrop="drop(event)"
+          ondragover="allowDrop(event)"
+        ></ol>
+      </div>
+      <div class="box done-box">
+        <div class="box-title">Done</div>
+        <ol
+          class="tasks-box"
+          id="done"
+          ondrop="drop(event)"
+          ondragover="allowDrop(event)"
+        ></ol>
+      </div>
+      <div class="garbage-bin" ondrop="drop(event)" ondragover="allowDrop(event)">
+        <img src="./garbageBinClose.png" id="garbageBin" alt="garbage bin" ondragenter="dragEnter(event)" ondragleave="dragLeave(event)">
+      </div>
+    </main>
+    <footer>Copy Right © Minghui Wang</footer>
+    <script
+      src="https://code.jquery.com/jquery-3.6.0.slim.min.js"
+      integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI="
+      crossorigin="anonymous"
+    ></script>
+    <script src="./js/script.js"></script>
+  </body>
+</html>

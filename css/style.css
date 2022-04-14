@@ -1,0 +1,180 @@
+/* Resets */
+
+/* Box Sizing Reset */
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+/* Img reset */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+body {
+  margin: 0;
+  font-family: "Roboto", sans-serif;
+}
+
+/* Type Styles */
+
+/* heading font */
+h1,
+h2,
+h3,
+nav a {
+  font-family: "Righteous", cursive;
+}
+
+p {
+  line-height: 1.4;
+}
+
+header h1 {
+  text-align: center;
+  padding: 0;
+  margin: 0;
+  background-color: #46e1b5;
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  user-select: none;
+  position: relative;
+  text-shadow: 1px 1px 1px gray;
+}
+header span {
+  position: absolute;
+  font-size: 1.1rem;
+  font-style: italic;
+  color: darkred;
+  top: 10px;
+  right: 20px;
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  user-select: none;
+}
+main {
+  background-image: linear-gradient(#46e1b5, #ffffff); /*背景渐变*/
+  display: flex;
+  justify-content: space-around;
+  height: 85vh; /* 取屏幕高度的85% */
+  margin: 0;
+  padding: 0;
+}
+
+.box {
+  margin: 10px 0;
+  width: 26%;
+  height: 98%;
+  background-color: #f2f2f2;
+  border-radius: 3%;
+  position: relative;
+}
+.garbage-bin{
+  width: 8%;
+  margin: 0;
+  padding: 0;
+  align-self: flex-end;
+}
+.box .box-title {
+  font-size: 1.2rem;
+  text-align: center;
+  margin-top: 15px;
+  color: #188868;
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  user-select: none; /* 当拖动项目时扫到它不会被选中 */
+}
+
+.box .tasks-box {
+  padding: 0;
+  overflow-y: auto;
+  margin: 8px;
+  height: 80%;
+}
+
+#progress,
+#done {
+  height: 90%;
+}
+
+.box ol li {
+  width: 85%;
+  background-color: #ffffff;
+  padding: 5px 8px;
+  margin: 8px auto;
+  border-radius: 2px;
+  box-shadow: 1px 1px 1px 1px gray;
+  cursor: grab;
+  font-size: 1.1rem;
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  user-select: none;
+  word-wrap: break-word;
+  text-shadow: 1px 1px rgb(180, 178, 178);
+}
+
+#newTask {
+  display: block;
+  margin: auto;
+  width: 85%;
+  height: 60px;
+  overflow: auto;
+  font-size: 1rem;
+  resize: none;
+  border: none;
+}
+
+#add-button {
+  width: 80%;
+  padding: 5px;
+  left: 50%;
+  transform: translateX(-50%);
+  position: absolute;
+  bottom: 10px;
+  border-radius: 5px;
+  font-size: 1.1rem;
+  border: 1px solid gray;
+  background-color: #c6ebe0;
+  cursor: pointer;
+  box-shadow: 1px 1px 1px 1px gray;
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  user-select: none;
+}
+
+#submit-cancel {
+  display: flex;
+  margin: 5px 0;
+  padding: 10px;
+  width: 100%;
+  justify-content: space-around;
+}
+
+#submit-button,
+#cancel-button {
+  display: block;
+  width: 40%;
+  font-size: 1.1rem;
+  border: 1px solid gray;
+  box-shadow: 1px 1px 1px 1px gray;
+  border-radius: 5px;
+}
+
+#submit-button {
+  background-color: rgb(136, 191, 253);
+}
+
+#cancel-button {
+  background-color: rgb(199, 243, 199);
+}
+
+.invisible {
+  display: none;
+}
+
+footer {
+  text-align: center;
+  margin-top: 8px;
+}
