@@ -16,6 +16,7 @@ if(localStorage.getItem("done")==null){
 function allowDrop(e) {
 //在ondragover中一定要执行preventDefault()，否则ondrop事件不会被触发。另外，如果是从其他应用软件或是文件中拖东西进来，尤其是图片的时候，默认的动作是显示这个图片或是相关信息，并不是真的执行drop。此时需要用用document的ondragover事件把它直接干掉。
 e.preventDefault();
+
 }
 
 function dragStart(e){
@@ -33,6 +34,7 @@ setTimeout(() => {
 
 //拖拽结束时刷新三个列表,dragEnd不管是否成功
 function dragEnd(e){
+
     readList("todo");
     readList("progress");
     readList("done");
@@ -41,6 +43,9 @@ function dragEnd(e){
 
 //放下时触发,不管是否成功都会触发
 function drop(e){
+    //修正在firefox下拖拽后页面跳转的问题
+    e.preventDefault();
+    e.stopPropagation();
 //获取被拖拽项目的信息
 let liContent=e.dataTransfer.getData("Text");
 let liId=e.dataTransfer.getData("Id");
@@ -65,6 +70,7 @@ insertData(liContent.trim(),column.trim());
 //刷新两个列表
 readList(column.trim());
 readList(liColumn);
+
 }
 
 getList=(column)=>{
