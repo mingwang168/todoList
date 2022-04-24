@@ -58,7 +58,7 @@ main {
   background-image: linear-gradient(#46e1b5, #ffffff); /*背景渐变*/
   display: flex;
   justify-content: space-around;
-  height: 85vh; /* 取屏幕高度的85% */
+  height: calc(100vh - 80px); /* 取屏幕高度的85% */
   margin: 0;
   padding: 0;
 }
@@ -93,7 +93,9 @@ main {
   margin: 8px;
   height: 80%;
 }
-
+#todo{
+  height: calc(100% - 100px);
+}
 #progress,
 #done {
   height: 90%;
@@ -103,27 +105,32 @@ main {
   width: 85%;
   background-color: #ffffff;
   padding: 5px 8px;
-  margin: 8px auto;
+  margin: 0px auto;
+  border: 1px solid grey;
   border-radius: 2px;
-  box-shadow: 1px 1px 1px 1px gray;
+  line-height: 2rem;
   cursor: grab;
   font-size: 1.1rem;
   -moz-user-select: none;
   -khtml-user-select: none;
   user-select: none;
   word-wrap: break-word;
+  box-shadow: 2px 2px 0px 6px #f2f2f2;
   text-shadow: 1px 1px rgb(180, 178, 178);
 }
 
 #newTask {
   display: block;
-  margin: auto;
   width: 85%;
   height: 60px;
   overflow: auto;
   font-size: 1rem;
   resize: none;
   border: none;
+  position: absolute;
+  bottom: 55px;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 #add-button {
@@ -136,7 +143,7 @@ main {
   border-radius: 5px;
   font-size: 1.1rem;
   border: 1px solid gray;
-  background-color: #c6ebe0;
+  background-color: #81caf5;
   cursor: pointer;
   box-shadow: 1px 1px 1px 1px gray;
   -moz-user-select: none;
@@ -147,9 +154,11 @@ main {
 #submit-cancel {
   display: flex;
   margin: 5px 0;
-  padding: 10px;
+  padding: 0px;
   width: 100%;
   justify-content: space-around;
+  position: absolute;
+  bottom: 10px;
 }
 
 #submit-button,
@@ -176,5 +185,7 @@ main {
 
 footer {
   text-align: center;
-  margin-top: 8px;
+  position: fixed;
+  bottom: 8px;
+  width: 100%;
 }

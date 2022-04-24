@@ -53,18 +53,15 @@ let liColumn=e.dataTransfer.getData("Column");
 
 //删除原数据库项目
 delData(liId,liColumn);
-
 var column;
 //如果拖到ul就用ul的id
 if(e.target.tagName=='OL'){
-    column=e.target.id
+    column=e.target.id;
+    pushData(liContent.trim(),column.trim());
     //如果拖到了li就用li的父节点的id
 }else if(e.target.tagName=='LI'){
-    column=e.target.parentNode.id
-}
-if(e.target.tagName=='OL' || e.target.tagName=='LI'){
-//在目标数据库中插入新项目
-insertData(liContent.trim(),column.trim());
+    column=e.target.parentNode.id;
+    insertData(liContent.trim(),column.trim(),liId,e.target.getAttribute('todoid'));
 }
 
 //刷新两个列表
@@ -96,15 +93,23 @@ localStorage.removeItem(column);
 localStorage.setItem(column,JSON.stringify(list));
 }
 
-//插入数据的函数
-insertData=(content,column)=>{
+//追加数据的函数
+pushData=(content,column)=>{
     let list=getList(column);
     let idStr=new Date().getTime();
     list.push({id:idStr,todo:content});
     localStorage.removeItem(column);
     localStorage.setItem(column,JSON.stringify(list));
 }
-
+//插入数据的函数
+insertData=(content,column,liId,targetId) => {
+    console.log(content,column,liId,targetId)
+    let list=getList(column);
+    let location=list.findIndex(item=>item.id==targetId);
+    list.splice(location,0,{id:liId,todo:content});
+    localStorage.removeItem(column);
+    localStorage.setItem(column,JSON.stringify(list));
+ }
 //从数据库中重新读取数据并重新生成list
 readList=(column)=>{
 document.getElementById(column).innerHTML="";
@@ -130,7 +135,7 @@ readList("done");
 
 //点新任务的按钮时触发
 addTodo=(e)=>{
-$('#todo').css('height','65%');
+$('#todo').css('height','calc(100% - 180px)');
 $("#submit-button").css('display','block')
 $("#cancel-button").css('display','block')
 $("#newTask").css('display','block')
@@ -151,7 +156,7 @@ submitTodo=()=>{
         localStorage.removeItem("todo");
         localStorage.setItem("todo",listStr)
         readList("todo");
-        $('#todo').css('height','80%');
+        $('#todo').css('height','calc(100% - 100px)');
         $("#newTask").css('display','none');
         $("#add-button").css('display','block');
         $("#submit-button").css('display','none');
@@ -163,7 +168,7 @@ submitTodo=()=>{
 //取消提交
 cancel=(e)=>{
     e.preventDefault();
-    $('#todo').css('height','80%');
+    $('#todo').css('height','calc(100% - 100px)');
     $("#newTask").css('display','none');
     $("#add-button").css('display','block');
     $("#submit-button").css('display','none');
@@ -171,7 +176,7 @@ cancel=(e)=>{
     $("#newTask").val("");
 }
 
-//双击一条任务就删除它
+//双击一条任务就编辑它
 editItem=(el)=>{
     var editItem=document.createElement("textarea");
     editItem.value=el.target.innerText;
@@ -223,7 +228,7 @@ editItem=(el)=>{
     editCancel.style.fontSize='1.1rem';
     editCancel.style.boxShadow='1px 1px 1px grey';
     editCancel.onclick=()=>{
-        readList(el.target.parentNode.id);
+       el.target.innerHTML=beforeText;
     }
     editCancel.ondblclick=(e)=>{
         e.stopPropagation();
