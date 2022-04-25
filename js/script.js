@@ -192,6 +192,7 @@ editItem=(el)=>{
     var editDiv=document.createElement('div');
     editDiv.style.display="flex";
     editDiv.style.justifyContent="space-around";
+    editDiv.style.cursor="default";
     editCommit.innerHTML="Commit";
     editCommit.style.width='80px';
     editCommit.style.height='30px';
