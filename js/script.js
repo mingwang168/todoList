@@ -229,6 +229,8 @@ editItem=(el)=>{
     editCancel.style.boxShadow='1px 1px 1px grey';
     editCancel.onclick=()=>{
        el.target.innerHTML=beforeText;
+       el.target.setAttribute('draggable','true');
+       el.target.setAttribute('ondblclick',"editItem(event)");
     }
     editCancel.ondblclick=(e)=>{
         e.stopPropagation();
