@@ -189,18 +189,21 @@ editItem=(el)=>{
     editItem.value=el.target.innerText;
     let beforeText=el.target.innerHTML;
     editItem.style.width='100%';
-    editItem.style.padding="0";
+    editItem.style.padding="5px";
     editItem.style.margin="0";
     editItem.style.fontSize="1.1rem";
     editItem.style.resize="none";
     editItem.style.border="none";
     let rowN=el.target.innerHTML.split('<br>').length;
-    if(editItem.value.length>=50 || rowN>=3){
+    if(editItem.value.length>=40 || rowN>=3){
         editItem.rows="3"
     }
-    if(editItem.value.length>=100 || rowN>=4){
+    if(editItem.value.length>=60 || rowN>=4){
         editItem.rows="4"
     };
+    if(rowN>=5){
+        editItem.rows=`${rowN}`;
+    }
     editItem.style.overflowY="auto";
     var editCommit=document.createElement('button');
     var editCancel=document.createElement('button');
