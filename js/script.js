@@ -58,15 +58,17 @@ var column;
 if(e.target.tagName=='OL'){
     column=e.target.id;
     pushData(liContent.trim(),column.trim());
+    //刷新两个列表
+readList(column);
+readList(liColumn);
     //如果拖到了li就用li的父节点的id
 }else if(e.target.tagName=='LI'){
     column=e.target.parentNode.id;
     insertData(liContent.trim(),column.trim(),liId,e.target.getAttribute('todoid'));
-}
-
-//刷新两个列表
-readList(column.trim());
+    //刷新两个列表
+readList(column);
 readList(liColumn);
+}
 
 }
 
@@ -116,7 +118,9 @@ document.getElementById(column).innerHTML="";
 let list=getList(column);
 for(let i of list){
     const li=document.createElement('li');
-    li.innerHTML=i.todo;
+    let inner=i.todo;
+    inner=inner.replace(/\r\n/g,"<br>");
+    li.innerHTML=inner;
     li.setAttribute('draggable',"true");
     li.setAttribute('droppable',"false");
     li.setAttribute('ondragend',"dragEnd(event)");
@@ -145,7 +149,10 @@ $("#add-button").css('display','none')
 
 //提交新任务
 submitTodo=()=>{
-    let todo=$("#newTask").val().trim();
+    let todo=$("#newTask").val();
+    todo=todo.replace(/\r\n/g,"<br>");
+    todo=todo.replace(/\n/g,"<br>");
+    todo=todo.trim();
     if(todo===""){
         alert("Can not be empty.");
     }else{
@@ -180,13 +187,21 @@ cancel=(e)=>{
 editItem=(el)=>{
     var editItem=document.createElement("textarea");
     editItem.value=el.target.innerText;
-    let beforeText=el.target.innerText;
+    let beforeText=el.target.innerHTML;
     editItem.style.width='100%';
     editItem.style.padding="0";
     editItem.style.margin="0";
     editItem.style.fontSize="1.1rem";
     editItem.style.resize="none";
     editItem.style.border="none";
+    let rowN=el.target.innerHTML.split('<br>').length;
+    if(editItem.value.length>=50 || rowN>=3){
+        editItem.rows="3"
+    }
+    if(editItem.value.length>=100 || rowN>=4){
+        editItem.rows="4"
+    };
+    editItem.style.overflowY="auto";
     var editCommit=document.createElement('button');
     var editCancel=document.createElement('button');
     var editDiv=document.createElement('div');
@@ -202,11 +217,13 @@ editItem=(el)=>{
     editCommit.style.boxShadow='1px 1px 1px grey';
     editCommit.onclick=()=>{
         let todoId=el.target.getAttribute("todoId");
-        if(editItem.value==""){
+        if(editItem.value.trim()==""){
             alert("Can not be empty.");
             editItem.focus();
             return;
         }
+        editItem.value=editItem.value.replace(/\r\n/g,"<br>");
+        editItem.value=editItem.value.replace(/\n/g,"<br>");
         let column=el.target.parentNode.id
         let list=getList(column);
         for(let i of list){
